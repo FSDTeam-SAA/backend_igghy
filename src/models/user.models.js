@@ -138,7 +138,7 @@ userSchema.methods.generateTokens = function () {
 
 // Generate username automatically based on name and add a @ and 2 digit number
 userSchema.pre('save', function (next) {
-    if (!this.isNew) return next(); // শুধুমাত্র নতুন ডকুমেন্টের জন্য
+    if (!this.isNew) return next();
 
     const username = this.name.toLowerCase().replace(/\s+/g, '');
     this.username = '@' + username + Math.floor(Math.random() * 100);

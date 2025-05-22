@@ -103,6 +103,7 @@ export const getHubs = catchAsync(async (req, res) => {
         assignedDate: hub.createdAt,
         email: hub.managerId ? hub.managerId.email : null,
         phone: hub.managerId ? hub.managerId.phone : null,
+        _id: hub._id
     }));
 
     sendResponse(res, {

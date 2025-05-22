@@ -137,6 +137,7 @@ export const addHubManager = catchAsync(async (req, res) => {
         password,
         role: 'hubManager',
         hubId,
+        isVerified: true
     });
 
     const hub = await Hub.findById(hubId);

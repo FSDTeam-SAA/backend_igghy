@@ -139,6 +139,13 @@ export const addHubManager = catchAsync(async (req, res) => {
         hubId,
     });
 
+    const hub = await Hub.findById(hubId);
+    if (!hub) {
+        throw new AppError(404, 'Hub not found');
+    }
+
+    await hub.updateOne({ managerId: newUser._id });
+
     sendResponse(res, {
         statusCode: 201,
         success: true,

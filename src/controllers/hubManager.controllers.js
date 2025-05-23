@@ -232,7 +232,7 @@ const fetchRequests = async (req, types) => {
         const product = request.productId;
         console.log(request);
         const hubIdToCheck = types.includes('pickup') || types.includes('print') || types.includes('delivery') || types.includes('receive') ? product.fromHubId._id : product.toHubId._id;
-        return hubIdToCheck.toString() === req.user.hubId.toString();
+        return hubIdToCheck.toString() === req.user?.hubId?.toString();
 
     });
 

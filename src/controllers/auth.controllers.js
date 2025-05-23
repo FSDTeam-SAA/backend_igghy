@@ -112,7 +112,7 @@ export const login = catchAsync(async (req, res) => {
         statusCode: 200,
         success: true,
         message: 'Login successful',
-        data: { accessToken, refreshToken, userId: user._id },
+        data: { accessToken, refreshToken, userId: user._id, user: user },
     });
 });
 

@@ -96,7 +96,13 @@ export const login = catchAsync(async (req, res) => {
     }
 
     if (!user.isVerified) {
-        throw new AppError(403, 'Account not verified');
+
+        return sendResponse(res,{
+            statusCode: 401,
+            success: false,
+            message: 'User not verified, please verify',
+            data: {userId: user._id}
+        })
     }
 
     const { accessToken, refreshToken } = user.generateTokens();

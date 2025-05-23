@@ -98,8 +98,8 @@ export const login = catchAsync(async (req, res) => {
     if (!user.isVerified) {
 
         return sendResponse(res,{
-            statusCode: 401,
-            success: false,
+            statusCode: 200,
+            success: true,
             message: 'User not verified, please verify',
             data: {userId: user._id}
         })

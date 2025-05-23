@@ -254,6 +254,7 @@ const fetchRequests = async (req, types) => {
 
     const formattedRequests = paginatedRequests.map((request) => ({
         requestId: request._id,
+        status: request.status,
         productCode: request.productId.uniqueCode,
         productName: request.productId.name,
         weight: request.productId.weight,

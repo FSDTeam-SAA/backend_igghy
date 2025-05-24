@@ -28,9 +28,6 @@ export const getProfile = catchAsync(async (req, res) => {
 export const manageRequest = catchAsync(async (req, res) => {
     const { requestId, action } = req.body;
 
-    // Log incoming request for debugging
-    console.log('Incoming Request:', req.body);
-
     if (!requestId || !action) {
         throw new AppError(400, 'Request ID and action are required');
     }

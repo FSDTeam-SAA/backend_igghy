@@ -461,7 +461,7 @@ export const getHistory = catchAsync(async (req, res) => {
 
 // Get user profile
 export const getProfile = catchAsync(async (req, res) => {
-    const user = await User.findById(req.user._id).select('name username image')
+    const user = await User.findById(req.user._id).select('-password')
     sendResponse(res, {
         statusCode: 200,
         success: true,

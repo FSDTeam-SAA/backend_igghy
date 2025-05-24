@@ -33,7 +33,6 @@ const fetchUsers = async (req, role) => {
         query.$or = [
             { name: { $regex: search, $options: 'i' } },
             { email: { $regex: search, $options: 'i' } },
-            { phone: { $regex: search, $options: 'i' } },
         ];
     }
 

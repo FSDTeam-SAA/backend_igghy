@@ -158,7 +158,7 @@ export const forgotPassword = catchAsync(async (req, res) => {
     user.resetCode = resetCode;
     await user.save();
 
-    await sendPasswordResetCode(email, resetCode);
+    await sendPasswordResetCode(email, resetCode); 
 
     sendResponse(res, {
         statusCode: 200,

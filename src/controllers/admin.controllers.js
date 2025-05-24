@@ -241,7 +241,6 @@ export const getAllTransporters = catchAsync(async (req, res) => {
         query.$or = [
             { name: { $regex: search, $options: 'i' } },
             { email: { $regex: search, $options: 'i' } },
-            { phone: { $regex: search, $options: 'i' } },
         ];
     }
 

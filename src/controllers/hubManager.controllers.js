@@ -29,8 +29,6 @@ export const manageRequest = catchAsync(async (req, res) => {
     console.log('Incoming Request:', req.body);
     const { requestId, action } = req.body;
 
-    // Log incoming request for debugging
-
     if (!requestId || !action) {
         throw new AppError(400, 'Request ID and action are required');
     }
@@ -199,8 +197,8 @@ export const manageRequest = catchAsync(async (req, res) => {
 const fetchRequests = async (req, types) => {
     const { page = 1, limit = 10, search = '', fromDate, toDate } = req.query;
 
-    const pageNum = Math.max(1, parseInt(page) || 1); // Ensure page is at least 1
-    const limitNum = Math.max(1, parseInt(limit) || 10); // Ensure limit is at least 1
+    const pageNum = Math.max(1, parseInt(page) || 1); 
+    const limitNum = Math.max(1, parseInt(limit) || 10);
     const skip = (pageNum - 1) * limitNum;
 
     let query = {

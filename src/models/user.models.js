@@ -99,7 +99,7 @@ const userSchema = new mongoose.Schema({
     {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Hub'
-    }, // For transporters
+    },
     arrivalHub:
     {
         type: mongoose.Schema.Types.ObjectId,

@@ -114,7 +114,6 @@ const productSchema = new mongoose.Schema({
         },
         timestamp: {
             type: Date,
-            default: Date.now
         },
         transporterId: {
             type: mongoose.Schema.Types.ObjectId,

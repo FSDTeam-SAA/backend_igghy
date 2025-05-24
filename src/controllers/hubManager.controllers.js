@@ -26,6 +26,7 @@ export const getProfile = catchAsync(async (req, res) => {
 
 // Approve or reject a request
 export const manageRequest = catchAsync(async (req, res) => {
+    console.log('Incoming Request:', req.body);
     const { requestId, action } = req.body;
 
     if (!requestId || !action) {
@@ -220,6 +221,7 @@ const fetchRequests = async (req, types) => {
                 { path: 'toHubId' },
                 { path: 'shipperId', select: 'name email phone' },
                 { path: 'receiverId', select: 'name email phone' },
+                {path : 'transporterId', select: 'name email phone'},
             ],
         })
         .populate('userId');
@@ -227,7 +229,6 @@ const fetchRequests = async (req, types) => {
     // Filter requests for the hub manager's hub
     let filteredRequests = requests.filter((request) => {
         const product = request.productId;
-        console.log(request);
         const hubIdToCheck = types.includes('pickup') || types.includes('print') || types.includes('delivery') || types.includes('receive') ? product.fromHubId._id : product.toHubId._id;
         return hubIdToCheck.toString() === req.user?.hubId?.toString();
 
@@ -241,7 +242,8 @@ const fetchRequests = async (req, types) => {
             return (
                 product.uniqueCode.toString().includes(search) ||
                 product.shipperId.name.toLowerCase().includes(search.toLowerCase()) ||
-                product.receiverId.name.toLowerCase().includes(search.toLowerCase())
+                product.receiverId.name.toLowerCase().includes(search.toLowerCase()) || 
+                product.transporterId.email.toLowerCase().includes(search.toLowerCase())
             );
         });
     }
@@ -251,6 +253,7 @@ const fetchRequests = async (req, types) => {
 
     const formattedRequests = paginatedRequests.map((request) => ({
         requestId: request._id,
+        status: request.status,
         productCode: request.productId.uniqueCode,
         productName: request.productId.name,
         weight: request.productId.weight,
@@ -259,6 +262,11 @@ const fetchRequests = async (req, types) => {
             name: request.productId.shipperId.name,
             email: request.productId.shipperId.email,
             phone: request.productId.shipperId.phone,
+        },
+        transporter: {
+            name: request.productId.transporterId.name,
+            email: request.productId.transporterId.email,
+            phone: request.productId.transporterId.phone,
         },
         receiver: {
             name: request.productId.receiverId.name,
